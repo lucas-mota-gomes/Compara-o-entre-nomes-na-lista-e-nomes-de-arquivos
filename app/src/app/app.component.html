@@ -1,11 +1,25 @@
-<textarea [(ngModel)]="nameList" name="" placeholder="Lista de nomes" id="" cols="30" rows="10"></textarea>
-<button (click)="sendMessage()" class="btn btn-primary d-block">Enviar</button>
-<div class="mt-4 p-3 border rounded" style="width: fit-content;" *ngIf="fileList.length > 0">
-  <a class="d-block" *ngFor="let item of fileList" href="{{item.path}}" target="_blank">{{item.name}}.svg</a>
-</div>
+<section class="d-flex flex-column justify-content-center align-items-center w-100 h-100 p-3">
+  <div class="d-flex flex-column flex-md-row w-100 justify-content-around">
+    <div>
+      <textarea [(ngModel)]="nameList" name="" placeholder="Lista de nomes" id="" cols="30" rows="10"></textarea>
+      <button (click)="sendMessage()" class="btn btn-primary d-block">Enviar</button>
+    </div>
+    <div>
+      <div class="mt-4 border rounded" style="width: fit-content;" *ngIf="fileList.length > 0">
+        <ng-container *ngFor="let item of fileList">
+          <a *ngIf="item.type == 0" class="d-block border p-3" href="http://localhost:5000/svg/{{item.name}}.svg" target="_blank">
+            <img src="http://localhost:5000/svg/{{item.name}}.svg" alt="">
+          </a>
+          <span class="d-block p-3 text-center border" *ngIf="item.type == 1">{{item.name}}</span>
+        </ng-container>
+      </div>
+      <div class="mt-4 p-3 border rounded" style="width: fit-content;" *ngIf="notFoundList.length > 0">
+        <h5 class="d-block">Nomes não encontrados</h5>
+        <p class="m-0" *ngFor="let item of notFoundList" target="_blank">{{item.name}}</p>
+      </div>
+      <button (click)="copy()" class="btn btn-primary d-block">Copiar caminhos</button>
+    </div>
+  </div>
 
-<div class="mt-4 p-3 border rounded" style="width: fit-content;" *ngIf="notFoundList.length > 0">
-  <h5 class="d-block">Nomes não encontrados</h5>
-  <p class="m-0" *ngFor="let item of notFoundList" target="_blank">{{item}}</p>
-</div>
+</section>
 <router-outlet></router-outlet>

@@ -17,8 +17,12 @@
     "socket.io": "^4.5.3"
   },
   "pkg": {
-    "assets": [ "assets/**/*" ],
-    "targets": [ "node16-win-x64" ],
+    "assets": [
+      "assets/**/*"
+    ],
+    "targets": [
+      "node16-win-x64"
+    ],
     "outputPath": "dist"
   }
 }

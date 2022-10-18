@@ -8,20 +8,24 @@ let dirCont;
 let files;
 let filesNames;
 
-function getFiles(){
+function getFiles() {
     dirCont = fs.readdirSync('./svg');
     files = dirCont.filter((elm) => elm.match(/.*\.(svg?)/ig));
     filesNames = [];
     justFileNames = [];
-    
+
     files.forEach((file) => {
         file = file.replace('.svg', '');
         filesNames.push({
-            name: file,
+            name: file.toLowerCase(),
             path: `http://localhost:5000/svg/${file}.svg`
         });
         justFileNames.push(file);
     });
+}
+
+function getFile(file) {
+    return fs.existsSync(`./svg/${file}.svg`);
 }
 
 getFiles();
@@ -48,14 +52,18 @@ io.sockets.on("connection", function (socket) {
             let nameList2 = [];
             nameList.forEach(element => {
                 if (element.length != 0) {
-                    nameList2.push(element);
+                    nameList2.push({
+                        name: element.toLowerCase(),
+                        path: `${__dirname}\\svg\\${element}.svg`,
+                        type: getFile(element.toLowerCase()) ? 0 : 1
+                    });
                 }
             });
             //filter array by name  
-            const filtered = filesNames.filter((elm) => nameList2.includes(elm.name));
-            const filtered2 = nameList2.filter((elm) => !justFileNames.includes(elm));
+            // const filtered = filesNames.filter((elm, index) => nameList2[index].name.includes(elm.name));
+            const filtered2 = nameList2.filter((elm) => !justFileNames.includes(elm.name));
             socket.emit("NotFoundlist", filtered2);
-            socket.emit("list", filtered);
+            socket.emit("list", nameList2);
         }
     });
 });

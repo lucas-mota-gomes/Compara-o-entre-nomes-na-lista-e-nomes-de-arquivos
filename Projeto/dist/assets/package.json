@@ -1,24 +1,8 @@
 {
-  "name": "projeto",
+  "name": "angular-cli-electron",
+  "productName": "Angular CLI + Electron",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "bin": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "open": "^8.4.0",
-    "socket.io": "^4.5.3"
-  },
-  "pkg": {
-    "assets": [ "./index.html", "./runtime.e873966bcdb4fc8a.js", "./polyfills.d00ba71d24f64d98.js", "./main.4a48b9b6764b4475.js", "./styles.ef46db3751d8e999.css" ],
-    "targets": [ "node16-win-x64" ],
-    "outputPath": "dist"
-  }
+  "description": "Angular CLI + Electron",
+  "main": "electron.prod.js",
+  "license": "MIT"
 }
