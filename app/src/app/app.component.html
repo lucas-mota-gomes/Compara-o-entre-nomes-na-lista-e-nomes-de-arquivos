@@ -1,0 +1,11 @@
+<textarea [(ngModel)]="nameList" name="" placeholder="Lista de nomes" id="" cols="30" rows="10"></textarea>
+<button (click)="sendMessage()" class="btn btn-primary d-block">Enviar</button>
+<div class="mt-4 p-3 border rounded" style="width: fit-content;" *ngIf="fileList.length > 0">
+  <a class="d-block" *ngFor="let item of fileList" href="{{item.path}}" target="_blank">{{item.name}}.svg</a>
+</div>
+
+<div class="mt-4 p-3 border rounded" style="width: fit-content;" *ngIf="notFoundList.length > 0">
+  <h5 class="d-block">Nomes não encontrados</h5>
+  <p class="m-0" *ngFor="let item of notFoundList" target="_blank">{{item}}</p>
+</div>
+<router-outlet></router-outlet>
