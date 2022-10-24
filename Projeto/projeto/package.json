@@ -1,0 +1,28 @@
+{
+  "name": "projeto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "bin": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "open": "^8.4.0",
+    "socket.io": "^4.5.3"
+  },
+  "pkg": {
+    "assets": [
+      "assets/**/*"
+    ],
+    "targets": [
+      "node16-win-x64"
+    ],
+    "outputPath": "dist"
+  }
+}
