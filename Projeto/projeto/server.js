@@ -17,7 +17,8 @@ function getFiles() {
     files.forEach((file) => {
         file = file.replace('.svg', '');
         filesNames.push({
-            name: file.toLowerCase(),
+            name: file,
+            untouchedName: file,
             path: `http://localhost:5000/svg/${file}.svg`
         });
         justFileNames.push(file);
@@ -53,9 +54,11 @@ io.sockets.on("connection", function (socket) {
             nameList.forEach(element => {
                 if (element.length != 0) {
                     nameList2.push({
-                        name: element.toLowerCase(),
-                        path: `${__dirname}\\svg\\${element}.svg`,
-                        type: getFile(element.toLowerCase()) ? 0 : 1
+                        name: element,
+                        path: `${element}.svg`,
+                        type: getFile(element) ? 0 : 1,
+                        untouchedName: justFileNames.filter((elm) => elm == element)[0],
+                        svg: getFile(element) ? fs.readFileSync(`./svg/${element}.svg`, 'utf8').toString().replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "'").replace("<?xml version='1.0' encoding='UTF-8'?>", "") : ""
                     });
                 }
             });

@@ -17,7 +17,7 @@ function getFiles() {
     files.forEach((file) => {
         file = file.replace('.svg', '');
         filesNames.push({
-            name: file.toLowerCase(),
+            name: file,
             untouchedName: file,
             path: `http://localhost:5000/svg/${file}.svg`
         });
@@ -35,7 +35,7 @@ var app = express();
 app.use('/', express.static('./assets'))
 app.use('/svg', express.static('./svg'))
 app.get("/app", function (req, res) {
-    // res.sendfile("./assets/index.html");
+    res.sendfile("./assets/index.html");
 });
 
 app.get("/io", function (req, res) {
@@ -54,11 +54,11 @@ io.sockets.on("connection", function (socket) {
             nameList.forEach(element => {
                 if (element.length != 0) {
                     nameList2.push({
-                        name: element.toLowerCase(),
+                        name: element,
                         path: `${element}.svg`,
-                        type: getFile(element.toLowerCase()) ? 0 : 1,
-                        untouchedName: justFileNames.filter((elm) => elm.toLowerCase() == element.toLowerCase())[0],
-                        svg: getFile(element.toLowerCase()) ? fs.readFileSync(`./svg/${element}.svg`, 'utf8').toString().replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "'").replace("<?xml version='1.0' encoding='UTF-8'?>", "") : ""
+                        type: getFile(element) ? 0 : 1,
+                        untouchedName: justFileNames.filter((elm) => elm == element)[0],
+                        svg: getFile(element) ? fs.readFileSync(`./svg/${element}.svg`, 'utf8').toString().replace(/(\r\n|\n|\r)/gm, "").replace(/"/g, "'").replace("<?xml version='1.0' encoding='UTF-8'?>", "") : ""
                     });
                 }
             });
